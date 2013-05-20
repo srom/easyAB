@@ -8,43 +8,60 @@
   var _views = [];
   var _name;
   var _alternatives;
+  var _DEFAULT_VALUE = '__easyab__default';
 
   function _getBucket(buckets) {
     return Math.floor(_seed % buckets);
   }
 
-  function _addVariable(options) {
-    _variables[_name] = _alternatives;
+  function _updateViews() {
     if (_views.length > 0) {
-      var tmpViews = _views;
-      for (var index in _views) {
-        for (var i = 0 ; i <= _alternatives.length ; i++) {
+      // update existing views
+      var tmpViews = [];
+      while (_views.length > 0) {
+        var view = _views.shift();
+        for (var ialt = 0 ; ialt <= _alternatives.length ; ialt++) {
+          var viewCopy = view.slice(0);
           var o = {};
-          o[_name] = i;
-          tmpViews[index].push(o);
+          if (ialt == 0) {
+            o[_name] = _DEFAULT_VALUE;
+          } else {
+            o[_name] = _alternatives[ialt - 1];
+          }
+          viewCopy.push(o);
+          tmpViews.push(viewCopy);
         }
       }
       _views = tmpViews;
     } else {
+      // create first views
       for (var i = 0 ; i <= _alternatives.length ; i++) {
         var tab = [];
         var o = {};
-        o[_name] = i;
+        if (i == 0) {
+          o[_name] = _DEFAULT_VALUE;
+        } else {
+          o[_name] = _alternatives[i-1];
+        }
         tab.push(o);
         _views.push(tab);
       }
     }
-    console.log(_views);
+  }
+
+  function _addVariable(options) {
+    _variables[_name] = _alternatives;
   }
 
   function _display($obj) {
-    var bucket = _getBucket(_views.length);
-    console.log('bucket: '  + bucket);
-    var value = _views[bucket];
-    var val = value[value.length - 1][_name];
-    console.log('val: ' + val);
-    if (val > 0) {
-      $obj.text(_alternatives[val-1]);
+    var bucket = _getBucket(_alternatives.length + 1);
+    if (bucket > 0) {
+      var alt = _alternatives[bucket-1];
+      if (typeof alt == 'string') {
+        $obj.text(alt);
+      } else if (typeof alt == 'function') {
+        alt($obj);
+      }
     }
   }
 
@@ -58,6 +75,7 @@
         _alternatives = options['alternatives'];
         if (_name && _alternatives) {
           _addVariable(options);
+          _updateViews();
           _display($this);
         }
       });
@@ -78,8 +96,8 @@
     });
 
     $('#2').easyab({
-      name: 'easy-test2',
-      alternatives: ["ah ah ah!"]
+      name: 'easy-test-function',
+      alternatives: [function($this) { $this.css('background-color', 'blue'); }]
     });
     
   });
