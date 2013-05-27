@@ -8,6 +8,8 @@
   var _views = [];
   var _name;
   var _alternatives;
+  var _currentBucket;
+  var _currentView;
   var _DEFAULT_VALUE = '__easyab__default';
 
   function _getBucket(buckets) {
@@ -18,6 +20,8 @@
     if (_views.length > 0) {
       // update existing views
       var tmpViews = [];
+      var tmpCurrentView = _currentView;
+      var countViews = 0;
       while (_views.length > 0) {
         var view = _views.shift();
         for (var ialt = 0 ; ialt <= _alternatives.length ; ialt++) {
@@ -30,7 +34,11 @@
           }
           viewCopy.push(o);
           tmpViews.push(viewCopy);
+          if (countViews === tmpCurrentView && ialt === _currentBucket) {
+            _currentView = tmpViews.length;
+          }
         }
+        countViews++;
       }
       _views = tmpViews;
     } else {
@@ -54,13 +62,13 @@
   }
 
   function _display($obj) {
-    var bucket = _getBucket(_alternatives.length + 1);
-    if (bucket > 0) {
-      var alt = _alternatives[bucket-1];
-      if (typeof alt == 'string') {
-        $obj.text(alt);
-      } else if (typeof alt == 'function') {
-        alt($obj);
+    var alternatives = _views[_currentView - 1];
+    var alternative = alternatives[alternatives.length - 1][_name];
+    if (alternative !== _DEFAULT_VALUE) {
+      if (typeof alternative == 'string') {
+        $obj.text(alternative);
+      } else if (typeof alternative == 'function') {
+        alternative($obj);
       }
     }
   }
@@ -74,6 +82,10 @@
         _name = options['name'];
         _alternatives = options['alternatives'];
         if (_name && _alternatives) {
+          _currentBucket = _getBucket(_alternatives.length + 1);
+          if (!_currentView) {
+            _currentView = _currentBucket + 1;
+          }
           _addVariable(options);
           _updateViews();
           _display($this);
