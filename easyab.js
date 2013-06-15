@@ -3,71 +3,55 @@
  */
 (function($) {
   
-  var _seed = Math.random() * 999;
-  var _variables = {};
-  var _views = [];
+  var _seed;
   var _name;
   var _alternatives;
   var _currentBucket;
-  var _currentView = 0;
-  var _DEFAULT_VALUE = '__easyab__default';
 
   function _getBucket(buckets) {
+    if (!_seed) {
+      _seed = _makeSeed();
+    }
     return Math.floor(_seed % buckets);
   }
 
-  function _updateViews() {
-    if (_views.length > 0) {
-      // update existing views
-      var tmpViews = [];
-      var tmpCurrentView = _currentView;
-      var countViews = 0;
-      while (_views.length > 0) {
-        countViews++;
-        var view = _views.shift();
-        for (var ialt = 0 ; ialt <= _alternatives.length ; ialt++) {
-          var viewCopy = view.slice(0);
-          var o = {};
-          if (ialt == 0) {
-            o[_name] = _DEFAULT_VALUE;
-          } else {
-            o[_name] = _alternatives[ialt - 1];
-          }
-          viewCopy.push(o);
-          tmpViews.push(viewCopy);
-          if (countViews === tmpCurrentView && ialt === _currentBucket) {
-            _currentView = countViews * (ialt + 1);
-          }
-        }
-      }
-      _views = tmpViews;
-    } else {
-      // create first views
-      for (var i = 0 ; i <= _alternatives.length ; i++) {
-        var tab = [];
-        var o = {};
-        if (i == 0) {
-          o[_name] = _DEFAULT_VALUE;
-        } else {
-          o[_name] = _alternatives[i-1];
-        }
-        tab.push(o);
-        _views.push(tab);
-      }
+  function _makeSeed() {
+    var seed = _readCookie('jquery_easyab_seed');
+    if (!seed) {
+      seed = Math.random() * 999;
+      _setCookie('jquery_easyab_seed', seed, 30);
     }
+    return seed;
   }
 
-  function _addVariable(options) {
-    _variables[_name] = _alternatives;
+  function _setCookie(name,value,days) {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime()+(days*24*60*60*1000));
+      var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
   }
+
+function _readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0;i < ca.length;i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+  }
+  return null;
+}
 
   function _display($obj) {
-    var alternatives = _views[_currentView - 1];
-    var alternative = alternatives[alternatives.length - 1][_name];
-    if (alternative !== _DEFAULT_VALUE) {
-      if (typeof alternative == 'string') {
+    console.log(_currentBucket);
+    if (_currentBucket !== 0) {
+      var alternative = _alternatives[_currentBucket - 1];
+      if (typeof alternative === 'string') {
         $obj.text(alternative);
-      } else if (typeof alternative == 'function') {
+      } else if (typeof alternative === 'function') {
         alternative($obj);
       }
     }
@@ -83,11 +67,6 @@
         _alternatives = options['alternatives'];
         if (_name && _alternatives) {
           _currentBucket = _getBucket(_alternatives.length + 1);
-          if (_currentView === 0) {
-            _currentView = _currentBucket + 1;
-          }
-          _addVariable(options);
-          _updateViews();
           _display($this);
         }
       });
