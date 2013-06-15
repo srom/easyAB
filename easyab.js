@@ -9,7 +9,7 @@
   var _name;
   var _alternatives;
   var _currentBucket;
-  var _currentView;
+  var _currentView = 0;
   var _DEFAULT_VALUE = '__easyab__default';
 
   function _getBucket(buckets) {
@@ -23,6 +23,7 @@
       var tmpCurrentView = _currentView;
       var countViews = 0;
       while (_views.length > 0) {
+        countViews++;
         var view = _views.shift();
         for (var ialt = 0 ; ialt <= _alternatives.length ; ialt++) {
           var viewCopy = view.slice(0);
@@ -35,10 +36,9 @@
           viewCopy.push(o);
           tmpViews.push(viewCopy);
           if (countViews === tmpCurrentView && ialt === _currentBucket) {
-            _currentView = tmpViews.length;
+            _currentView = countViews * (ialt + 1);
           }
         }
-        countViews++;
       }
       _views = tmpViews;
     } else {
@@ -83,7 +83,7 @@
         _alternatives = options['alternatives'];
         if (_name && _alternatives) {
           _currentBucket = _getBucket(_alternatives.length + 1);
-          if (!_currentView) {
+          if (_currentView === 0) {
             _currentView = _currentBucket + 1;
           }
           _addVariable(options);
