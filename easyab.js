@@ -5,21 +5,29 @@
   
   var _seed;
   var _name;
-  var _alternatives;
-  var _currentBucket;
+  var _alternative;
+  var _bucket;
+  var _dev;
+  var _DEV_REGEX = /#!dev/;
 
   function _getBucket(buckets) {
-    if (!_seed) {
-      _seed = _makeSeed();
+    var seed;
+    if (!_dev) {
+      if (!_seed) {
+        _seed = _makeSeed();
+      }
+      seed = _seed;
+    } else {
+      seed = Math.random() * 999;
     }
-    return Math.floor(_seed % buckets);
+    return Math.floor(seed % buckets);
   }
 
   function _makeSeed() {
-    var seed = _readCookie('jquery_easyab_seed');
+    var seed = _readCookie('_easyab_seed');
     if (!seed) {
       seed = Math.random() * 999;
-      _setCookie('jquery_easyab_seed', seed, 30);
+      _setCookie('-_easyab_seed', seed, 30);
     }
     return seed;
   }
@@ -46,9 +54,8 @@ function _readCookie(name) {
 }
 
   function _display($obj) {
-    console.log(_currentBucket);
-    if (_currentBucket !== 0) {
-      var alternative = _alternatives[_currentBucket - 1];
+    if (_alternative['alternative']) {
+      var alternative = _alternative['alternative'];
       if (typeof alternative === 'string') {
         $obj.text(alternative);
       } else if (typeof alternative === 'function') {
@@ -57,39 +64,79 @@ function _readCookie(name) {
     }
   }
 
+  function _trackCustomVar(slot, name, value, options) {
+    var scope = options['scope'] || 3;
+    window['_gaq'].push(['_setCustomVar',
+        slot,
+        name,
+        value,
+        scope
+      ]);
+  }
+
+  function _trackEvent(category, action, options) {
+    var label = options['event-label'] || undefined,
+        value = options['event-action'] || undefined,
+        noninteraction = ['event-noninteraction'] || true;
+    window['_gaq'].push(['_trackEvent',
+        category,
+        action,
+        label,
+        value,
+        noninteraction
+      ]);
+  }
+
+  function _log(msg) {
+    if (typeof window['console'] !== undefined
+      && typeof msg === 'string') {
+      return window['console']['log'](msg);
+    }
+  }
+
+  function _track(options) {
+    if (typeof window['_gaq'] !== undefined) {
+      var value = '',
+          slot = options['slot'];
+      if (_bucket !== 0) {
+        value = _alternative['value'] || 'alternative' + _bucket;
+      } else {
+        value = options['default-value'] || 'default';
+      }
+      if (_dev) {
+        if (slot) {
+          _log(_name + ' : ' + value + ' (custom var ' + slot + ')');
+        } else {
+          _log(_name + ' : ' + value + ' (event)');
+        }
+      } else if (slot) {
+        _trackCustomVar(slot, _name, value, options);
+      } else {
+       _trackEvent(_name, value, options);
+      }
+    }
+  }
+
   $.fn.easyab = function(options) {
-    if (!options || typeof options != 'object') {
+    if (!options || typeof options !== 'object') {
       return this;
     } else {
+      _name = options['name'];
+      if (_name && options['alternatives']) {
+          _dev = _DEV_REGEX.test(window.location);
+          _bucket = _getBucket(options['alternatives'].length + 1);
+          if (_bucket !== 0) {
+            _alternative = options['alternatives'][_bucket - 1];
+          }
+          _track(options);
+        }
       return this.each(function() {
         var $this = $(this);
-        _name = options['name'];
-        _alternatives = options['alternatives'];
-        if (_name && _alternatives) {
-          _currentBucket = _getBucket(_alternatives.length + 1);
+        if (_bucket !== 0) {  
           _display($this);
         }
       });
     }
   };
   
-})(window['jQuery']);
-
-/**
- * Main closure.
- */
-(function($) {
-  $(document).ready(function() {
-    
-    $('#1').easyab({
-      name: 'easy-test',
-      alternatives: ["Salut!", "Hey!!"]
-    });
-
-    $('#2').easyab({
-      name: 'easy-test-function',
-      alternatives: [function($this) { $this.css('background-color', 'blue'); }]
-    });
-    
-  });
 })(window['jQuery']);

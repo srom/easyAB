@@ -3,14 +3,50 @@
   <head>
     <title>easyAB sandbox</title>
 	<script type="text/javascript">
-	  _gaq = [];
+	  var _gaq = _gaq || [];
 	</script>
   </head>
   <body>
-	<div id="1">Coucou !</div>
-	<div id="2" style="background-color: red; color: white;">oh oh oh!</div>
+		<div id="1">Coucou !</div>
+		<div id="2" style="background-color: red; color: white;">oh oh oh!</div>
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="./easyab.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="./easyab.js"></script>
+		<script type="text/javascript">
+		  /**
+			 * Main closure.
+			 */
+			(function($) {
+			  $(document).ready(function() {
+			    
+			    $('#1').easyab({
+			      name: 'welcome-text',
+			      alternatives: [
+			        {
+			          value: 'alt1',
+			          alternative: 'Salut!'
+			        },
+			        {
+			          value: 'alt2',
+			          alternative: 'Hey!'
+			        }
+			      ],
+			      slot: 1
+			    });
+
+			    $('#2').easyab({
+			      name: 'div-bkg-color',
+			      alternatives: [
+			        {
+			          value: 'blue',
+			          alternative: function($this) { $this.css('background-color', 'blue'); }
+			        }
+			      ],
+			      slot: 2
+			    });
+			    
+			  });
+			})(window['jQuery']);
+		</script>
   </body>
 </html>
