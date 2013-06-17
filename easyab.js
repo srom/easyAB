@@ -3,7 +3,7 @@
  */
 (function($) {
   
-  var _seed;
+  var _seed;  
   var _name;
   var _alternative;
   var _bucket;
@@ -27,7 +27,7 @@
     var seed = _readCookie('_easyab_seed');
     if (!seed) {
       seed = Math.random() * 999;
-      _setCookie('-_easyab_seed', seed, 30);
+      _setCookie('_easyab_seed', seed, 30);
     }
     return seed;
   }
