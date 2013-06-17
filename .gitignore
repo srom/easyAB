@@ -30,6 +30,5 @@ Thumbs.db
 *~
 # Sublime text project files
 *.sublime-workspace
-
-# node local web server
-localwebserver.js
+# local files
+local/
