@@ -1,4 +1,4 @@
 easyAB
 ======
 
-easyAB is a jQuery and Zepto plugin for easier and faster A/B testing.
+easyAB is a light-weight jQuery / Zepto plugin for quickly and easily setting up A/B tests

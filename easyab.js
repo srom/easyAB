@@ -1,7 +1,7 @@
 /* easyAB v1.0.0 | (c) 2013 @_srom | srom.github.io/easyAB | MIT @license */
 
 /**
- * easyAB is a jQuery and Zepto plugin for easier and faster A/B testing.
+ * easyAB is a light-weight jQuery / Zepto plugin for quickly and easily setting up A/B tests.
  * @see srom.github.io/easyAB
  * @author Romain Strock (Twitter: @_srom)
  * @version v1.0.0
