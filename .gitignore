@@ -32,3 +32,5 @@ Thumbs.db
 *.sublime-workspace
 # local files
 local/
+# github pages see https://gist.github.com/chrisjacob/833223
+gh-pages/
