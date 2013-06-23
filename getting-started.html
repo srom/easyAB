@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Getting started with easyAB</title>
+
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript">
+      // Analytics private variable
+      var _gaq = _gaq || [];
+      // /!\ use your own property ID
+      _gaq.push(['_setAccount', 'UA-41970503-1']);
+      // track whatever you feel like
+      _gaq.push(['_trackPageview']);
+      // add Analytics script
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+  	<div class="container">
+      <h1 class="text-center">My <span class="book-adjective">awesome</span> book</h1>
+      <hr>
+      <div class="row">
+        <div class="well span4 offset4 text-center">
+          <p>Check out my <b><span class="book-adjective">awesome</span> book</b>! <em>Only $4.99</em></p>
+          <button class="btn btn-success btn-large" id="purchase-button">Get it!</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/zepto.min.js"></script>
+    <script src="js/easyab.min.js"></script>
+    <script type="text/javascript">
+      (function($) {
+        $(document).ready(function() {
+
+          /* A/B test: gs-book-adjective
+             it will sets a custom var on the slot 5
+             with the key 'gs-book-adjective' and the 
+             value 'default' or 'alternative1'
+          */
+          $('.book-adjective').easyab({
+            'name': 'gs-book-adjective',
+            'alternatives': [
+              {
+                'alternative': 'award winning'
+              }
+            ],
+            'slot': 5
+          });
+
+          /* A/B/C test: gs-book-adjective. It will 
+             sets an event because no slot is specified,
+             with the key 'gs-book-adjective' and the 
+             value 'green', 'night-blue' or 'blue'
+          */
+          $('#purchase-button').easyab({
+            'name': 'gs-purchase-button',
+            'default-value': 'green',
+            'alternatives': [
+              {
+                'value': 'night-blue',
+                'alternative': function($this) { $this.removeClass('btn-success').addClass('btn-primary'); }
+              },
+              {
+                'value': 'blue',
+                'alternative': function($this) { $this.removeClass('btn-success').addClass('btn-info  '); }
+              }
+            ]
+          });
+
+        });
+      })(window.Zepto);
+    </script>
+  </body>
+</html>
