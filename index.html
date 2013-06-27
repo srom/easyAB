@@ -6,6 +6,7 @@
     <meta name="author" content="@_srom">
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/prettify.css" rel="stylesheet">
 
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -18,33 +19,68 @@
         })();
       </script>
   </head>
-  <body>
+  <body onLoad="prettyPrint();">
 
     <div id="header">
     	<div class="container">
         <h1>easyAB</h1>
-        <H3>a jQuery / Zepto plugin for easily setting up A/B and Multivariate tests</H3>
+        <h4>A jQuery / Zepto plugin for easily setting up A/B and Multivariate tests using Analytics</h4>
         <div class="row">
-          <div class="span3 offset3">
+          <div class="span4">
             <p>
-              <button class="btn btn-success btn-large">Download easyAB</button>
+              <button class="btn btn-success btn-large" id="download-btn">Download easyAB</button>
             </p>
-            <span>Less than 2 Ko</span>
+            <div>
+              <span>v1.0.0</span>
+            </div>
+            <div>
+              <span>Less than 2 Ko</span>
+            </div>
+            <div>
+              <iframe src="http://ghbtns.com/github-btn.html?user=srom&repo=easyAB&type=watch&count=false&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px"></iframe>
+            </div>
+            <div>
+              <a href="#marketing">Learn more</a>
+            </div>
           </div>
-          <div class="span1">
-            <p><b>and</b></p>
-          </div>
-          <div class="span2">
-            <iframe src="github-btn.html?user=srom&repo=easyAB&type=watch&count=false&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px"></iframe>
+          <div class="span7">
+            <p>
+              I'm in <b>a mood for change</b>.<br>
+              What about a new color for my download button?<br>
+              But wait. How will I be able to know which color is your favorite one?<br>
+              Ok, that should <b>do the trick</b>:
+            </p>
+            <pre class="prettyprint lang-js">
+$('#download-btn').easyab({
+  'slot': 1,
+  'name': 'download-button-color',
+  'default-value': 'apple-green',
+  'alternatives': [{
+    'value': 'fire-red',
+    'alternative': function($this) { 
+      $this.removeClass('btn-success').addClass('btn-danger'); 
+    }
+  }]
+});</pre>
+            <p>
+              Hey fellow visitor, which button are you seeing right now? Apple Green or Fire Red?<br>
+              Do you want to see the two versions running? I know you do.<br>
+              Follow <a href="#!dev">this link</a> and reload the page multiple times.<br>
+              Voilà ! You are now <b>savvy enough</b> to start A/B testing using easyAB.
+            </p>
           </div>
         </div>
         <hr>
       </div>
     </div>
 
-    <div id="">
-
+    <div id="marketing">
+      <div class="container">
+        Coucou
+      </div>
     </div>
 
+    <!-- js  -->
+    <script src="/js/prettify.js"></script>
   </body>
 </html>
