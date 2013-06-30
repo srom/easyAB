@@ -45,7 +45,7 @@
           </div>
           <div class="span7">
             <p>
-              I'm in <b>a mood for change</b>.<br>
+              I'm in <b>the mood for change</b>.<br>
               What about a new color for my download button?<br>
               But wait. How will I be able to know which color is your favorite one?<br>
               Ok, that should <b>do the trick</b>:
@@ -66,17 +66,219 @@ $('#download-btn').easyab({
               Hey fellow visitor, which button are you seeing right now? Apple Green or Fire Red?<br>
               Do you want to see the two versions running? I know you do.<br>
               Follow <a href="#!dev">this link</a> and reload the page multiple times.<br>
-              Voilà ! You are now <b>savvy enough</b> to start A/B testing using easyAB.
+              Voilà ! You are now <b>savvy enough</b> to start testing on your own users using easyAB!
             </p>
           </div>
         </div>
-        <hr>
       </div>
     </div>
 
     <div id="marketing">
       <div class="container">
-        Coucou
+        <hr>
+        <h3>Usage</h3>
+        
+        <h4>Multivariate testing made easy</h4>
+        <p>
+          I want to change both the text on top of my button and the color of the button. 
+          And I want to <b>track the impact</b> of each change <b>independently</b>.
+         </p>
+        <p>That's <b>multivariate testing</b>. And that's easy:</p>
+        <div class="row">
+          <div class="span6">
+            <pre class="prettyprint lang-js">
+  /* set an Analytics custom var on the slot 1 */
+  $('.book-adjective').easyab({
+    'slot': 1
+    'name': 'gs-book-adjective',
+    'alternatives': [{
+      'alternative': 'award winning'
+    }]
+  });
+
+  /* set an Analytics custom var on the slot 2 */
+  $('#purchase-button').easyab({
+    'slot': 2
+    'name': 'gs-purchase-button',
+    'alternatives': [{
+      'alternative': 
+        function($this) { 
+          $this
+            .removeClass('btn-success')
+            .addClass('btn-primary'); 
+        }
+    }]
+  });</pre>
+          </div>
+          <div class="span6">
+            <div class="row-fluid">
+              <div class="well span6 text-center">
+                <p>Check out my <b><span class="book-adjective">awesome</span> book</b>! <em>Only $4.99</em></p>
+                <button class="btn btn-success btn-large" id="purchase-button-1">Get it now!</button>
+              </div>
+              <div class="well span6 text-center">
+                <p>Check out my <b><span class="book-adjective">award-winning</span> book</b>! <em>Only $4.99</em></p>
+                <button class="btn btn-success btn-large" id="purchase-button-2">Get it now!</button>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="well span6 text-center">
+                <p>Check out my <b><span class="book-adjective">awesome</span> book</b>! <em>Only $4.99</em></p>
+                <button class="btn btn-primary btn-large" id="purchase-button-3">Get it now!</button>
+              </div>
+              <div class="well span6 text-center">
+                <p>Check out my <b><span class="book-adjective">award-winning</span> book</b>! <em>Only $4.99</em></p>
+                <button class="btn btn-primary btn-large" id="purchase-button-4">Get it now!</button>
+              </div>
+            </div>
+            <div class="text-center">
+              <img src="/images/analytics.png" alt="Analytics">
+            </div>
+          </div>
+        </div>
+
+        <h4>Dev mode</h4>
+        <p>
+          To see the different versions of your page, append <b><em>#!dev</em></b> to the url.  
+          Then, <b>open your console</b> and <b>refresh the page</b>. That's it.
+        </p>
+      </div>
+    </div>
+
+    <div id="options">
+      <div class="container">
+        <hr>
+        <h3>Options</h3>
+        <p>You can track which version of the test your users are seeing using two methods: custom variables or events</p>
+        <div class="row">
+          <div class="span6">
+            <h4>Event</h4>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>type</th>
+                  <th>default</th>
+                  <th>description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td>number</td>
+                  <td></td>
+                  <td>The name (or key) of the event. <b>required</b></td>
+                </tr>
+                <tr>
+                  <td>alternatives</td>
+                  <td>Array.&lt;object&gt;</td>
+                  <td></td>
+                  <td>
+                    The alternatives. <b>required</b><br>
+                    Objects structure:<br>
+                      - value (optional string): the event action. default: 'alternative<b>i</b>'<br>
+                      - alternative (required): string or function.
+                  </td>
+                </tr>
+                <tr>
+                  <td>default-value</td>
+                  <td>string</td>
+                  <td>'default'</td>
+                  <td>The name of the default value.</td>
+                </tr>
+                <tr>
+                  <td>event-label</td>
+                  <td>string</td>
+                  <td>undefined</td>
+                  <td>An optional label for the event.</td>
+                </tr>
+                <tr>
+                  <td>event-value</td>
+                  <td>number</td>
+                  <td>undefined</td>
+                  <td>An optional value for the event.</td>
+                </tr>
+                <tr>
+                  <td>event-noninteraction</td>
+                  <td>boolean</td>
+                  <td>true</td>
+                  <td>
+                    The non-interaction option of the event.<br>
+                    The default value for an event is usually 'false' but it makes sense to sets 
+                    this option to true in order to not affect the bounce rate.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="span6">
+            <h4>Custom variable</h4>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>type</th>
+                  <th>default</th>
+                  <th>description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>slot</td>
+                  <td>number</td>
+                  <td></td>
+                  <td>The custom variable's slot. <b>required</b></td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>number</td>
+                  <td></td>
+                  <td>The name (or key) of the custom var. <b>required</b></td>
+                </tr>
+                <tr>
+                  <td>alternatives</td>
+                  <td>Array.&lt;object&gt;</td>
+                  <td></td>
+                  <td>
+                    The alternatives. <b>required</b><br>
+                    Objects structure:<br>
+                      - value (optional string): the cutom var's value. default: 'alternative<b>i</b>'<br>
+                      - alternative (required): string or function.
+                  </td>
+                </tr>
+                <tr>
+                  <td>default-value</td>
+                  <td>string</td>
+                  <td>'default'</td>
+                  <td>The name of the default value.</td>
+                </tr>
+                <tr>
+                  <td>scope</td>
+                  <td>number</td>
+                  <td>3</td>
+                  <td>The name scope of the custom var.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about">
+      <div class="container">
+        <hr>
+        <h3>About</h3>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <hr>
+        <div class="text-center" id="copyright">
+          Copyright &copy; 2013 <a href="https://twitter.com/_srom">Romain Strock</a>
+        </div>
+        <hr class="invisible">
       </div>
     </div>
 
