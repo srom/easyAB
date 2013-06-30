@@ -180,7 +180,7 @@
    */
   function _trackEvent(category, action, options) {
     var label = options['event-label'] || undefined,
-        value = options['event-action'] || undefined,
+        value = options['event-value'] || undefined,
         noninteraction = ['event-noninteraction'] || true;
     window['_gaq'].push(['_trackEvent',
         category,
