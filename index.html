@@ -31,7 +31,7 @@
               <button class="btn btn-success btn-large" id="download-btn">Download easyAB</button>
             </p>
             <div>
-              <span>v1.0.0</span>
+              <span>v1.0.1</span>
             </div>
             <div>
               <span>Less than 2 Ko</span>
@@ -81,12 +81,18 @@ $('#download-btn').easyab({
         <h4>Multivariate testing made easy</h4>
         <p>
           I want to change both the text on top of my button and the color of the button. 
-          And I want to <b>track the impact</b> of each change <b>independently</b>.
+          And I want to <b>track the impact of each change independently</b>.
          </p>
         <p>That's <b>multivariate testing</b>. And that's easy:</p>
+        <ul class="nav nav-tabs" id="product-tabs">
+          <li class="active"><a href="#product-js" data-toggle="tab">Javascript</a></li>
+          <li><a href="#product-html" data-toggle="tab">HTML</a></li>
+        </ul>
         <div class="row">
           <div class="span6">
-            <pre class="prettyprint lang-js">
+            <div class="tab-content">
+              <div class="tab-pane active" id="product-js">
+                <pre class="prettyprint lang-js">
   /* set an Analytics custom var on the slot 1 */
   $('.book-adjective').easyab({
     'slot': 1
@@ -109,6 +115,33 @@ $('#download-btn').easyab({
         }
     }]
   });</pre>
+              </div>
+              <div class="tab-pane" id="product-html">
+                <pre class="prettyprint lang-html">
+/* 
+ *  ... don't forget to init analytics
+ *  and track whatever you feel like 
+ *  (e.g event on click on the purchase button)
+ */
+
+&ltdiv class="well text-center"&gt
+  &ltp&gt
+  Check out my 
+  &ltb&gt&ltspan class="book-adjective"&gtawesome&lt/span&gt 
+  book&lt/b&gt! 
+  &ltem&gtOnly $4.99&lt/em&gt
+  &lt/p&gt
+  &ltbutton class="btn btn-success btn-large" 
+          id="purchase-button" 
+          onclick="_gaq.push(['_trackEvent', 
+              'Purchase actions', 
+              'Purchase']);"&gt
+    Get it now!
+  &lt/button&gt
+&lt/div&gt
+                </pre>
+              </div>
+            </div>
           </div>
           <div class="span6">
             <div class="row-fluid">
@@ -149,70 +182,15 @@ $('#download-btn').easyab({
       <div class="container">
         <hr>
         <h3>Options</h3>
-        <p>You can track which version of the test your users are seeing using two methods: custom variables or events</p>
-        <div class="row">
-          <div class="span6">
-            <h4>Event</h4>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>type</th>
-                  <th>default</th>
-                  <th>description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>name</td>
-                  <td>number</td>
-                  <td></td>
-                  <td>The name (or key) of the event. <b>required</b></td>
-                </tr>
-                <tr>
-                  <td>alternatives</td>
-                  <td>Array.&lt;object&gt;</td>
-                  <td></td>
-                  <td>
-                    The alternatives. <b>required</b><br>
-                    Objects structure:<br>
-                      - value (optional string): the event action. default: 'alternative<b>i</b>'<br>
-                      - alternative (required): string or function.
-                  </td>
-                </tr>
-                <tr>
-                  <td>default-value</td>
-                  <td>string</td>
-                  <td>'default'</td>
-                  <td>The name of the default value.</td>
-                </tr>
-                <tr>
-                  <td>event-label</td>
-                  <td>string</td>
-                  <td>undefined</td>
-                  <td>An optional label for the event.</td>
-                </tr>
-                <tr>
-                  <td>event-value</td>
-                  <td>number</td>
-                  <td>undefined</td>
-                  <td>An optional value for the event.</td>
-                </tr>
-                <tr>
-                  <td>event-noninteraction</td>
-                  <td>boolean</td>
-                  <td>true</td>
-                  <td>
-                    The non-interaction option of the event.<br>
-                    The default value for an event is usually 'false' but it makes sense to sets 
-                    this option to true in order to not affect the bounce rate.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="span6">
-            <h4>Custom variable</h4>
+        <p>You can track which version of the test your users are seeing using two methods: <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables">custom variables</a> or <a href="https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide">events</a></p>
+
+        <ul class="nav nav-tabs" id="options-tabs">
+          <li class="active"><a href="#option-custom-var" data-toggle="tab">Custom variable tracking</a></li>
+          <li><a href="#option-event" data-toggle="tab">Event tracking</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="option-custom-var">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -241,9 +219,10 @@ $('#download-btn').easyab({
                   <td></td>
                   <td>
                     The alternatives. <b>required</b><br>
-                    Objects structure:<br>
-                      - value (optional string): the cutom var's value. default: 'alternative<b>i</b>'<br>
-                      - alternative (required): string or function.
+                    Object structure:<br>
+                    &nbsp;&nbsp;- alternative: <b>required</b> string or function.<br>
+                    &nbsp;&nbsp;- value: optional string representing the custom var's value.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;default value: "alternative<b>i</b>" (i being the index of the array)
                   </td>
                 </tr>
                 <tr>
@@ -256,7 +235,67 @@ $('#download-btn').easyab({
                   <td>scope</td>
                   <td>number</td>
                   <td>3</td>
-                  <td>The name scope of the custom var.</td>
+                  <td>The scope of the custom var.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane" id="option-event">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>type</th>
+                  <th>default</th>
+                  <th>description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td>number</td>
+                  <td></td>
+                  <td>The name (or key) of the event. <b>required</b></td>
+                </tr>
+                <tr>
+                  <td>alternatives</td>
+                  <td>Array.&lt;object&gt;</td>
+                  <td></td>
+                  <td>
+                    The alternatives. <b>required</b><br>
+                    Object structure:<br>
+                    &nbsp;&nbsp;- alternative: <b>required</b> string or function.<br>
+                    &nbsp;&nbsp;- value: optional string representing the event's action.<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;default value: "alternative<b>i</b>" (i being the index of the array)
+                  </td>
+                </tr>
+                <tr>
+                  <td>default-value</td>
+                  <td>string</td>
+                  <td>'default'</td>
+                  <td>The name of the default value.</td>
+                </tr>
+                <tr>
+                  <td>event-label</td>
+                  <td>string</td>
+                  <td>undefined</td>
+                  <td>An optional label for the event.</td>
+                </tr>
+                <tr>
+                  <td>event-value</td>
+                  <td>number</td>
+                  <td>undefined</td>
+                  <td>An optional value for the event.</td>
+                </tr>
+                <tr>
+                  <td>event-noninteraction</td>
+                  <td>boolean</td>
+                  <td>true</td>
+                  <td>
+                    The non-interaction option of the event.<br>
+                    The default value for an event is usually 'false' but it makes sense<br> 
+                    to sets this option to true in order to not affect the bounce rate.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -283,6 +322,8 @@ $('#download-btn').easyab({
     </div>
 
     <!-- js  -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="/js/prettify.js"></script>
+    <script src="/js/bootstrap-tab.min.js"></script>
   </body>
 </html>
