@@ -1,0 +1,183 @@
+/*
+ * Style for easyAB front page
+ */
+
+body {
+  background-image: url(/images/debut_light.png);
+  background-repeat: repeat;
+  color:  #4E4E4E;
+}
+
+.title {
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.block-content {
+  margin-bottom: 20px;
+}
+
+a, a:visited {
+  color: #555;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #222;
+}
+
+#header {
+  background-color: #3399FF;
+  color: #fff;
+  height: 750px;
+  text-align: center;
+  border-bottom: 1px solid #2673FF;
+}
+
+#header .container {
+  padding-top: 80px;
+}
+
+#header h1 {
+  font-size: 10em;
+  line-height: 2em;
+}
+
+#header h2 {
+  font-size: 1.6em;
+}
+
+#header .learn-more {
+  margin-top: 70px;
+  font-size: 1.5em;
+}
+
+#header .learn-more a, #header .learn-more a:visited {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#header .learn-more a:hover {
+  font-weight: bold;
+}
+
+#header #forkme {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+}
+
+#presentation {
+  padding: 50px 0;
+  border-bottom: 1px solid #ECECEC;
+}
+
+#presentation .download-btn-container {
+  margin-top: 35px;
+  margin-bottom: 10px;
+}
+
+#presentation #gh-star {
+  margin-top: 25px;
+  padding-left: 35px;
+}
+
+#presentation .menu {
+  margin-top: 25px;
+}
+
+#presentation .block-content {
+  margin-bottom: 40px;
+}
+
+#marketing {
+  background-color: #FFFAFA;
+  padding: 50px 0;
+}
+
+#options {
+  border-top: 1px solid #ECECEC;
+  padding: 50px 0;
+}
+
+#options h4 {
+  margin: 20px 0;
+  color: #666;
+}
+
+.nav a, .nav a:visited, .nav a:hover {
+  text-decoration: none;
+}
+
+#about {
+  background-color: #3399FF;
+  color: #fff;
+  border-top: 1px solid #2673FF;
+  padding: 50px 0;
+}
+
+#about .title {
+  color: #FFF;
+}
+
+#about a, #about a:visited {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#about a:hover {
+  text-decoration: none;
+}
+
+#reminder {
+  background-color: #3399FF;
+  padding: 25px 0 90px;
+  border-bottom: 1px solid #2673FF;
+}
+
+#reminder .reminder-label {
+  padding-top: 5px;
+  color: #666;
+}
+
+#download-btn a, #download-btn a:visited, #download-btn a:hover,
+#download-btn-reminder a, #download-btn-reminder a:visited, #download-btn-reminder a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.box {
+  border: 1px dashed #2673FF;
+  padding: 20px;
+  background-image: url(/images/debut_light.png);
+  background-repeat: repeat;
+}
+
+#footer {
+  font-size: 12px;
+}
+
+#footer .top {
+  padding:  10px 0 10px;
+}
+
+#footer #copyright {
+  padding-bottom: 20px;
+}
+
+.easyab {
+  font-weight: bold;
+}
+
+.easyab .a {
+  color: #9A3334;
+}
+
+.easyab .b {
+  color: #333399;
+}
+
+.easyab .c {
+  color: #217C7E;
+}

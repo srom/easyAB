@@ -2,11 +2,12 @@
 <html>
   <head>
     <title>easyAB - a jQuery / Zepto plugin for easily setting up A/B tests</title>
-    <meta name="description" content="easyAB is a light-weight jQuery / Zepto plugin for easily and quickly setting up A/B and Multivariate tests">
+    <meta name="description" content="easyAB is a light-weight jQuery / Zepto plugin for easily setting up A/B and Multivariate tests using Analytics">
     <meta name="author" content="@_srom">
-
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/prettify.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png">
 
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -19,28 +20,45 @@
         })();
       </script>
   </head>
-  <body onLoad="prettyPrint();">
 
+  <body onLoad="prettyPrint();">
     <div id="header">
+      <a href="https://github.com/srom/easyAB"><img src="/images/forkme.png" id="forkme" alt="Fork me on GitHub"></a>
     	<div class="container">
-        <h1>easyAB</h1>
-        <h4>A jQuery / Zepto plugin for easily setting up A/B and Multivariate tests using Analytics</h4>
+        <h1 class="easyab">easy<span class="a">A</span><span class="b">B</span></h1>
+        <h2>A jQuery / Zepto plugin for easily setting up <span class="easyab"><span class="a">A</span>/<span class="b">B</span></span> and <span class="easyab"><span class="a">Mult</span><span class="b">ivar</span><span class="c">iate</span></span> tests using Analytics</h2>
+        <p class="learn-more text-center"><a href="#presentation">Learn more</a></p>
+      </div>
+    </div>
+
+    <div id="presentation">
+      <div class="container">
+        <h3 class="title">Start testing your pages in no time with easyAB</h3>
+        <p class="block-content">This plugin aims at helping entrepreneurs and tech savvy <b>building better landing pages</b> for their projects and products.</p>
         <div class="row">
-          <div class="span4">
-            <p>
-              <button class="btn btn-success btn-large" id="download-btn"><b>Download easyAB</b></button>
-            </p>
-            <div>
-              <span>v1.0.1</span>
+          <div class="span4 text-center">
+            <div class="download-btn-container">
+              <button class="btn btn-success btn-large" id="download-btn"><a href="http://srom.github.io/easyAB/js/easyab.min.js"><b>Download easyAB</b></a></button>
             </div>
             <div>
               <span>Less than 2 Ko</span>
             </div>
             <div>
-              <iframe src="http://ghbtns.com/github-btn.html?user=srom&repo=easyAB&type=watch&count=false&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px"></iframe>
+              <span>v1.0.1</span>
             </div>
-            <div>
-              <a href="#marketing">Learn more</a>
+            <div id="gh-star">
+              <iframe src="http://ghbtns.com/github-btn.html?user=srom&repo=easyAB&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px"></iframe>
+            </div>
+            <div class="menu">
+              <p>
+                <a href="#marketing">Multivariate testing</a>
+              </p>
+              <p>
+                <a href="#options">Options</a>
+              </p>
+              <p>
+                <a href="#about">About</a>
+              </p>
             </div>
           </div>
           <div class="span7">
@@ -57,8 +75,8 @@ $('#download-btn').easyab({
   'default-value': 'apple-green',
   'alternatives': [{
     'value': 'fire-red',
-    'alternative': function($this) { 
-      $this.removeClass('btn-success').addClass('btn-danger'); 
+    'alternative': function($this) {
+      $this.removeClass('btn-success').addClass('btn-danger');
     }
   }]
 });</pre>
@@ -66,7 +84,7 @@ $('#download-btn').easyab({
               Hey fellow visitor, which button are you seeing right now? Apple Green or Fire Red?<br>
               Do you want to see the two versions running? I know you do.<br>
               Follow <a href="#!dev">this link</a> and reload the page multiple times.<br>
-              Voilà ! You are now <b>savvy enough</b> to start testing on your own users using easyAB!
+              Voilà ! You are now <b>savvy enough</b> to start testing on your own users using <span class="easyab">easy<span class="a">A</span><span class="b">B</span></span>!
             </p>
           </div>
         </div>
@@ -75,13 +93,14 @@ $('#download-btn').easyab({
 
     <div id="marketing">
       <div class="container">
-        <hr>
-        <h3>Multivariate testing made easy</h3>
-        <p>
-          I want to change both the text on top of my button and the color of the button. 
-          And I want to <b>track the impact of each change independently</b>.
-         </p>
-        <p>That's <b>multivariate testing</b>. And that's easy:</p>
+        <h3 class="title">Multivariate testing made easy</h3>
+        <div class="block-content">
+          <p>
+            I want to change both the text on top of my button and the color of the button.
+            And I want to <b>track the impact of each change independently</b>.
+           </p>
+          <p>That's <b>multivariate testing</b>. And that's easy:</p>
+        </div>
         <ul class="nav nav-tabs" id="product-tabs">
           <li class="active"><a href="#product-js" data-toggle="tab">Javascript</a></li>
           <li><a href="#product-html" data-toggle="tab">HTML</a></li>
@@ -105,34 +124,34 @@ $('#download-btn').easyab({
     'slot': 2
     'name': 'gs-purchase-button',
     'alternatives': [{
-      'alternative': 
-        function($this) { 
+      'alternative':
+        function($this) {
           $this
             .removeClass('btn-success')
-            .addClass('btn-primary'); 
+            .addClass('btn-primary');
         }
     }]
   });</pre>
               </div>
               <div class="tab-pane" id="product-html">
                 <pre class="prettyprint lang-html">
-/* 
+/*
  *  ... don't forget to init analytics
- *  and to track whatever you feel like 
+ *  and to track whatever you feel like
  *  (e.g event on click on the purchase button)
  */
 
 &ltdiv class="well text-center"&gt
   &ltp&gt
-  Check out my 
-  &ltb&gt&ltspan class="book-adjective"&gtawesome&lt/span&gt 
-  book&lt/b&gt! 
+  Check out my
+  &ltb&gt&ltspan class="book-adjective"&gtawesome&lt/span&gt
+  book&lt/b&gt!
   &ltem&gtOnly $4.99&lt/em&gt
   &lt/p&gt
-  &ltbutton class="btn btn-success btn-large" 
-          id="purchase-button" 
-          onclick="_gaq.push(['_trackEvent', 
-              'Purchase actions', 
+  &ltbutton class="btn btn-success btn-large"
+          id="purchase-button"
+          onclick="_gaq.push(['_trackEvent',
+              'Purchase actions',
               'Purchase']);"&gt
     Get it now!
   &lt/button&gt
@@ -172,9 +191,10 @@ $('#download-btn').easyab({
 
     <div id="options">
       <div class="container">
-        <hr>
-        <h3>Options</h3>
-        <p>You can track which version of the test your users are seeing using two methods: <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables">custom variables</a> or <a href="https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide">events</a></p>
+        <h3 class="title">Options</h3>
+        <div class="block-content">
+          <p>easyAB let you track your changes using two ways: <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables">custom variables</a> or <a href="https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide">events</a></p>
+        </div>
 
         <ul class="nav nav-tabs" id="options-tabs">
           <li class="active"><a href="#option-custom-var" data-toggle="tab">Custom variable tracking</a></li>
@@ -285,7 +305,7 @@ $('#download-btn').easyab({
                   <td>true</td>
                   <td>
                     The non-interaction option of the event.<br>
-                    The default value for an event is usually 'false' but it makes sense<br> 
+                    The default value for an event is usually 'false' but it makes sense<br>
                     to sets this option to true in order to not affect the bounce rate.
                   </td>
                 </tr>
@@ -293,19 +313,22 @@ $('#download-btn').easyab({
             </table>
           </div>
         </div>
-        
+
         <h4>Dev mode</h4>
         <p>
-          To see the different versions of your page, append <b><em>#!dev</em></b> to the url.  
+          To see the different versions of your page, append <b><em>#!dev</em></b> to the url.
           Then, <b>open your console</b> and <b>refresh the page</b>. That's it.
         </p>
+        <hr class="invisible">
+        <div class="alert alert-info">
+          <strong>Side note</strong> -  easyAB use cookies to select which version of the page users will see. Accordingly, users with cookies disabled will always see the default version of the page.
+        </div>
       </div>
     </div>
 
     <div id="about">
       <div class="container">
-        <hr>
-        <h3>About</h3>
+        <h3 class="title">About</h3>
         <p>
           Developed by <a href="https://twitter.com/_srom">Romain Strock</a>, also known as <a href="https://twitter.com/_srom">srom</a>.<br>
           Like what you're seeing? <a href="https://github.com/srom/easyAB/blob/master/CONTRIBUTING.md">Help me improve this plugin</a>.<br>
@@ -316,15 +339,14 @@ $('#download-btn').easyab({
 
     <div id="reminder">
       <div class="container">
-        <hr class="invisible">
-        <div class="well">
+        <div class="box">
           <div class="row">
             <div class="span3 offset1">
-              <button class="btn btn-large btn-block btn-success"><b>Download easyAB</b></button>
+              <button class="btn btn-large btn-block btn-success" id="download-btn-reminder"><a href="http://srom.github.io/easyAB/js/easyab.min.js"><b>Download easyAB</b></a></button>
             </div>
-            <div class="span6 offset1">
-                  <b>No more reading, no more thinking<br>
-                  Start building amazing landing pages using easyAB!</b>
+            <div class="reminder-label span6 offset1">
+              <b>No more reading, no more thinking<br>
+              Start building amazing landing pages with easyAB!</b>
             </div>
           </div>
         </div>
@@ -333,18 +355,21 @@ $('#download-btn').easyab({
 
     <div id="footer">
       <div class="container">
-        <hr>
-        <div class="text-center"><a href="#">top</a></div>
+        <div class="top text-center"><a href="#">top</a></div>
+        <div class="credits text-center">
+          <p>Pattern from <a href="http://subtlepatterns.com/">Subtle Patterns</a> - Built with <a href="http://twitter.github.io/bootstrap/">Bootstrap</a></p>
+        </div>
         <div class="text-center" id="copyright">
           Copyright &copy; 2013 <a href="https://twitter.com/_srom">Romain Strock</a>
         </div>
-        <hr class="invisible">
       </div>
     </div>
 
-    <!-- js  -->
+    <!-- js -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/js/easyab.min.js"></script>
     <script src="/js/prettify.js"></script>
     <script src="/js/bootstrap-tab.min.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>
