@@ -1,6 +1,6 @@
 # [easyAB](http://srom.github.io/easyAB/)
 
-easyAB is a light-weight (< 2 Ko) jQuery / Zepto plugin for easily setting up A/B and multivariate tests using Google Analytics.
+easyAB is a light-weight (< 2 Ko) jQuery / Zepto plugin for easily setting up A/B and multivariate tests using Google Analytics.<br>
 This tool aims at helping entrepreneurs and tech savvy building better landing pages for their projects and products.
 
 ## Quick start
