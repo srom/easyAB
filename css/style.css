@@ -3,7 +3,7 @@
  */
 
 body {
-  background-image: url(images/debut_light.png);
+  background-image: url(../images/debut_light.png);
   background-repeat: repeat;
   color:  #4E4E4E;
 }
@@ -150,7 +150,7 @@ a:hover {
 .box {
   border: 1px dashed #2673FF;
   padding: 20px;
-  background-image: url(images/debut_light.png);
+  background-image: url(../images/debut_light.png);
   background-repeat: repeat;
 }
 
