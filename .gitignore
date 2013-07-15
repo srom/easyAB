@@ -28,6 +28,8 @@ Thumbs.db
 ########
 # text edit temp files
 *~
+# emacs buffers
+\#*#
 # Sublime text project files
 *.sublime-workspace
 # local files
