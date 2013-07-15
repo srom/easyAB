@@ -19,6 +19,8 @@
       }]
     });
 
+    // track page view after setCustomVar when using scope 1 & 2
+    window['_gaq'].push(['_trackPageview']);
 
     // analytics tracking on click
     var downloadRedirection = function() {
