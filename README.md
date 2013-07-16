@@ -26,7 +26,8 @@ Comprehensive doc: [srom.github.io/easyAB/](http://srom.github.io/easyAB/)
 
 ## Road map
 
-- Add support for Universal Analytics
+- Add support for [Universal Analytics](https://support.google.com/analytics/answer/2790010?hl=en)
+- Add support for [Content Experiment API](http://analytics.blogspot.fr/2013/06/google-analytics-becomes-robust-testing.html)
 - Add better ways to track you tests in dev mode
 
 ## License
