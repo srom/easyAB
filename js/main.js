@@ -19,6 +19,11 @@
       }]
     });
 
+    // no bounce over 30 seconds
+    window.setTimeout(function() {
+      window['_gaq'].push(['_trackEvent', 'No Bounce', 'Over 30 seconds']);
+    }, 30000);
+
     // track page view after setCustomVar when using scope 1 & 2
     window['_gaq'].push(['_trackPageview']);
 
