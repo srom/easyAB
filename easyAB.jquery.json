@@ -1,0 +1,30 @@
+{
+    "name": "easyAB",
+    "title": "easyAB",
+    "description": "A jQuery / Zepto plugin for easily setting up A/B and Multivariate tests using Analytics.",
+    "keywords": [
+        "testing",
+        "ab",
+        "analytics",
+        "multivariate",
+        "experiments"
+    ],
+    "version": "1.0.2",
+    "author": {
+        "name": "Romain Strock",
+        "url": "https://twitter.com/_srom"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/srom/easyAB/blob/master/LICENSE"
+        }
+    ],
+    "bugs": "https://github.com/srom/easyAB/issues",
+    "homepage": "http://srom.github.io/easyAB/",
+    "docs": "http://srom.github.io/easyAB/",
+    "download": "https://github.com/srom/easyAB/blob/master/easyab.min.js",
+    "dependencies": {
+        "jquery": ">=1.4"
+    }
+}

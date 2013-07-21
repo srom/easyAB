@@ -1,19 +1,19 @@
-/* easyAB v1.0.1 | (c) 2013 @_srom | srom.github.io/easyAB | MIT @license */
+/* easyAB v1.0.2 | (c) 2013 @_srom | srom.github.io/easyAB | MIT @license */
 
 /**
  * easyAB is a light-weight jQuery / Zepto plugin for quickly and easily setting up A/B tests.
  * @see srom.github.io/easyAB
  * @author Romain Strock (Twitter: @_srom)
- * @version v1.0.1
+ * @version v1.0.2
  */
 (function($) {
-  
+
   /**
    * The seed used to select the bucket.
    * @type {number}
    * @private
    */
-  var _seed;  
+  var _seed;
 
   /**
    * The name of the test.
@@ -60,7 +60,7 @@
   var _COOKIE_NAME = '_easyab_seed';
 
   /**
-   * Uses the seed and the number of buckets to choose 
+   * Uses the seed and the number of buckets to choose
    * the bucket value.
    * @param {number} buckets The number of buckets.
    * @return {number} The selected bucket.
@@ -69,7 +69,7 @@
   function _getBucket(buckets) {
     var seed;
     if (!_dev) {
-      // prod mode: gets the existing seed if exists or 
+      // prod mode: gets the existing seed if exists or
       // creates a new seed
       if (!_seed) {
         _seed = _makeSeed();
@@ -84,7 +84,7 @@
   }
 
   /**
-   * Checks if a cookie containing the seed is available. If not, this 
+   * Checks if a cookie containing the seed is available. If not, this
    * method generates a random seed and store it in a cookie.
    * @return {number} The seed.
    * @private
@@ -171,8 +171,8 @@
   /**
    * Sets a Google Analytics' event.
    * Please note that the default value of the event's parameter 'non interaction'
-   * is usually false. Here, the default value is true because A/B tests should 
-   * not affect the bounce rate. 
+   * is usually false. Here, the default value is true because A/B tests should
+   * not affect the bounce rate.
    * @param {string} category The category.
    * @param {string} action The action.
    * @param {Object} options Additional options.
@@ -242,8 +242,8 @@
    * @param {Object} options The options.
    */
   $.fn.easyab = function(options) {
-    if (!options 
-        || typeof options !== 'object' 
+    if (!options
+        || typeof options !== 'object'
         || !navigator.cookieEnabled) {
       return this;
     } else {
@@ -258,7 +258,7 @@
       }
       return this.each(function() {
         var $this = $(this);
-        if (_bucket !== 0) {  
+        if (_bucket !== 0) {
           _display($this);
         }
       });
