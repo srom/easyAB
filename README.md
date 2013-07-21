@@ -33,3 +33,5 @@ Comprehensive doc: [srom.github.io/easyAB/](http://srom.github.io/easyAB/)
 ## License
 
 Copyright 2013 [Romain Strock](https://twitter.com/_srom) - [MIT License](https://github.com/srom/easyAB/blob/master/LICENSE)
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/3b9f5baa8c54378cb668b5c1a2ede638 "githalytics.com")](http://githalytics.com/srom/easyAB)
