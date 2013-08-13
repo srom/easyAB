@@ -9,13 +9,13 @@ This tool aims at helping entrepreneurs and tech savvy building better landing p
 // change the color of .my-button for 50% of my visitors and
 // track the users with analytics using a single method!
 $('.my-button').easyab({
-  'slot': 5 // set the custom var on the slot 5
+  'slot': 5, // set the custom var on the slot 5
   'name': 'test-button',
-  'default-value': 'green'
+  'default-value': 'green',
   'alternatives': [
     {
       // set an alternative
-      'value': 'blue'
+      'value': 'blue',
       'alternative': function($this) { $this.css('background-color', 'blue'); }
     }
   ],
