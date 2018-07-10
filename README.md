@@ -1,4 +1,4 @@
-# This project is no longer maintained
+# ⚠️ This project is no longer maintained ⚠️
 
 easyAB is a light-weight (< 2 Ko) jQuery plugin for easily setting up A/B and multivariate tests using Google Analytics.
 
